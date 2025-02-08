@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/bookhive/header";
 import Footer from "@/components/bookhive/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { TRPCProvider } from "@/trpc/client";
 
 export const metadata: Metadata = {
   title: "BookHive - Ultimate destination for book lovers",
@@ -27,9 +28,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <TRPCProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </TRPCProvider>
         </ThemeProvider>
       </body>
     </html>
