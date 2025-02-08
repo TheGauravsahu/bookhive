@@ -30,7 +30,7 @@ export default function RootLayout({
         >
           <TRPCProvider>
             <Header />
-            <main>{children}</main>
+            <main className="min-h-screen w-full pt-16 md:pt-4">{children}</main>
             <Footer />
           </TRPCProvider>
         </ThemeProvider>
