@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Uploader from "@/components/uploader";
 
 export default function AddBookForm() {
   const addBookForm = useForm<AddBookFormValues>({
@@ -33,16 +34,17 @@ export default function AddBookForm() {
     },
   });
 
+  const onUploadSuccess = (url: string) => {
+    addBookForm.setValue("coverImage", url);
+  };
+
   function onSubmit(values: AddBookFormValues) {
-    console.log("formValues",values);
+    console.log("formValues", values);
   }
 
   return (
     <Form {...addBookForm}>
-      <form
-        onSubmit={addBookForm.handleSubmit(onSubmit)}
-        className="space-y-8"
-      >
+      <form onSubmit={addBookForm.handleSubmit(onSubmit)} className="space-y-8">
         {/* title */}
         <FormField
           control={addBookForm.control}
@@ -110,6 +112,21 @@ export default function AddBookForm() {
                     <SelectItem value="fantasy">Fantasy</SelectItem>
                   </SelectContent>
                 </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* cover image */}
+        <FormField
+          control={addBookForm.control}
+          name="coverImage"
+          render={() => (
+            <FormItem>
+              <FormLabel>Cover Image</FormLabel>
+              <FormControl>
+                <Uploader onUploadSuccess={onUploadSuccess} />
               </FormControl>
               <FormMessage />
             </FormItem>
