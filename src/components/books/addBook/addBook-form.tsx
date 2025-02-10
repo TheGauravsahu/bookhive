@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Uploader from "@/components/uploader";
+import { trpc } from "@/trpc/client";
 
 export default function AddBookForm() {
   const addBookForm = useForm<AddBookFormValues>({
@@ -30,7 +31,7 @@ export default function AddBookForm() {
       description: "",
       coverImage: "",
       author: "",
-      categoryId: "",
+      category: "",
     },
   });
 
@@ -38,8 +39,17 @@ export default function AddBookForm() {
     addBookForm.setValue("coverImage", url);
   };
 
+  const createbookMutation = trpc.book.add.useMutation({
+    onSuccess: (data) => {
+      console.log("Book added:", data);
+    },
+    onError: (error) => {
+      console.error("failed to add book:", error.message);
+    },
+  });
   function onSubmit(values: AddBookFormValues) {
     console.log("formValues", values);
+    createbookMutation.mutate(values);
   }
 
   return (
@@ -93,7 +103,7 @@ export default function AddBookForm() {
         {/* category */}
         <FormField
           control={addBookForm.control}
-          name="categoryId"
+          name="category"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Category</FormLabel>

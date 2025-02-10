@@ -1,4 +1,4 @@
-import superjson from "superjson";
+// import superjson from "superjson";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { cache } from "react";
 import { auth } from "@/auth";
@@ -16,7 +16,7 @@ export const createTRPCContext = cache(async (opts: { headers: Headers }) => {
 });
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
-  transformer: superjson,
+  // transformer: superjson,
   errorFormatter({ error, shape }) {
     return {
       ...shape,
@@ -32,6 +32,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const publicProcedure = t.procedure;
+
 export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
   if (!ctx.session || !ctx.session.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });

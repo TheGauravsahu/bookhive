@@ -11,10 +11,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { SignupFormValues, signupSchema } from "./schema";
+import { SignupFormValues, signupSchema } from "./auth.schema";
 import Link from "next/link";
+import { trpc } from "@/trpc/client";
+import { useRouter } from "next/router";
+import { toast } from "sonner";
 
 export default function SignupForm() {
+  const router = useRouter();
+
   const signupForm = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -24,17 +29,23 @@ export default function SignupForm() {
     },
   });
 
+  const signupMutation = trpc.user.create.useMutation({
+    onSuccess: (data) => {
+      console.log("User created:", data);
+      toast.success("Signup successfull.Login to continue");
+      router.push("/login");
+    },
+    onError: (error) => {
+      console.error("Signup failed:", error.message);
+      toast.error(error.message);
+    },
+  });
+
   const onSubmit = async (values: SignupFormValues) => {
-    try {
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
-        body: JSON.stringify(values),
-      });
-      console.log(res)
-    } catch (error) {
-      console.log(error);
-    }
+    console.log("values", values);
+    signupMutation.mutate(values);
   };
+
   return (
     <Form {...signupForm}>
       <form onSubmit={signupForm.handleSubmit(onSubmit)} className="space-y-8">

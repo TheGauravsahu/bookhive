@@ -3,8 +3,8 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/bookhive/header";
 import Footer from "@/components/bookhive/footer";
-import { ThemeProvider } from "@/components/theme-provider";
-import { TRPCProvider } from "@/trpc/client";
+import { Toaster } from "@/components/ui/sonner";
+import Provider from "@/components/bookhive/providers";
 
 export const metadata: Metadata = {
   title: "BookHive - Ultimate destination for book lovers",
@@ -22,18 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${jakarta.className}  antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TRPCProvider>
-            <Header />
-            <main className="min-h-screen w-full pt-16 md:pt-4">{children}</main>
-            <Footer />
-          </TRPCProvider>
-        </ThemeProvider>
+        <Provider>
+          <Header />
+          <main className="min-h-screen w-full pt-16 md:pt-4">{children}</main>
+          <Toaster />
+          <Footer />
+        </Provider>
       </body>
     </html>
   );

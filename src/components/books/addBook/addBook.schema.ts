@@ -11,7 +11,7 @@ export const addBookSchema = z.object({
     .min(10, "Description must be at least 10 characters")
     .max(2000, "Description is too long"),
   coverImage: z.string().url("Invalid URL").optional(),
-  categoryId: z.string().optional(),
+  category: z.string().optional(),
 });
 
 export type AddBookFormValues = z.infer<typeof addBookSchema>;
