@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={`${jakarta.className}  antialiased`}>
         <Provider>
           <Header />
-          <main className="min-h-screen w-full pt-16 md:pt-4">{children}</main>
+          <main className="min-h-screen w-full pt-16 md:pt-4 pb-12">{children}</main>
           <Toaster />
           <Footer />
         </Provider>
