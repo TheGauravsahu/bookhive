@@ -11,11 +11,11 @@ export default function BookCard({ book }: BookCardProps) {
   return (
     <div className="w-96 h-96 border rounded-lg p-4 dark:bg-black bg-secondary">
       <div className="w-full h-[60%] rounded-lg overflow-hidden">
-        <Link href={"/books/" + book.id}>
+        <Link href={"/books/" + book.id} prefetch={true}>
           <Image
             className="w-full h-full rounded-lg object-cover cursor-pointer hover:scale-95 ease-in-out transition-all"
-            width={100}
-            height={100}
+            width={600}
+            height={600}
             src={book.coverImage}
             alt={book.title}
           />
