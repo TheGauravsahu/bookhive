@@ -59,5 +59,8 @@ export const { signIn, signOut, auth, handlers } = NextAuth({
       return token;
     },
   },
+  pages: {
+    signIn: "/login",
+  },
   secret: process.env.AUTH_SECRET,
 });

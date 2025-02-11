@@ -22,8 +22,13 @@ import {
 } from "@/components/ui/select";
 import Uploader from "@/components/uploader";
 import { trpc } from "@/trpc/client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function AddBookForm() {
+  const router = useRouter();
+  const utils = trpc.useUtils();
+
   const addBookForm = useForm<AddBookFormValues>({
     resolver: zodResolver(addBookSchema),
     defaultValues: {
@@ -42,13 +47,15 @@ export default function AddBookForm() {
   const createbookMutation = trpc.book.add.useMutation({
     onSuccess: (data) => {
       console.log("Book added:", data);
+      toast.success("Book added successfully.");
+      utils.book.invalidate();
+      router.push("/books");
     },
     onError: (error) => {
       console.error("failed to add book:", error.message);
     },
   });
   function onSubmit(values: AddBookFormValues) {
-    console.log("formValues", values);
     createbookMutation.mutate(values);
   }
 

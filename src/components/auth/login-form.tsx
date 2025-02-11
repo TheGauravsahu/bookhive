@@ -13,8 +13,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { LoginFormValues, loginSchema } from "./auth.schema";
 import Link from "next/link";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function LoginForm() {
+  const router = useRouter();
+
   const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -23,8 +28,18 @@ export default function LoginForm() {
     },
   });
 
-  const onSubmit = (values: LoginFormValues) => {
-    console.log(values);
+  const onSubmit = async (values: LoginFormValues) => {
+    const res = await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      redirect: false
+    });
+    if (res?.error) {
+      toast.error("Invalid email or password.");
+    } else {
+      toast.success("Login successful!");
+      router.push("/books");
+    }
   };
   return (
     <Form {...loginForm}>

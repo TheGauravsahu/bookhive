@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { SignupFormValues, signupSchema } from "./auth.schema";
 import Link from "next/link";
 import { trpc } from "@/trpc/client";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export default function SignupForm() {
@@ -32,7 +32,7 @@ export default function SignupForm() {
   const signupMutation = trpc.user.create.useMutation({
     onSuccess: (data) => {
       console.log("User created:", data);
-      toast.success("Signup successfull.Login to continue");
+      toast.success("Signup successfull. Login to continue");
       router.push("/login");
     },
     onError: (error) => {

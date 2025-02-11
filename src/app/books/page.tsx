@@ -3,12 +3,11 @@ import React from "react";
 
 export default async function Books() {
   const books = await trpc.book.getAll();
-  console.log(books);
   return (
     <div className="h-screen p-8">
-      {/* {books.map((book) => (
+      {books.map((book) => (
         <li key={book.id}>{book.title}</li>
-      ))} */}
+      ))}
     </div>
   );
 }
