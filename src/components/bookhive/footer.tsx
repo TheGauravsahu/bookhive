@@ -10,7 +10,7 @@ export default function Footer() {
       </div>
       <div className="flex gap-4 ">
         <Link href="/">Home</Link>
-        <Link href="/">Books</Link>
+        <Link href="/books">Books</Link>
         <Link href="/">Trending</Link>
       </div>
     </footer>
