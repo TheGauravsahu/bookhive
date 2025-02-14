@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Your ultimate destination for book lovers. Read reviews rate books and share recommendations with the community.",
 };
 
-const jakarta = Plus_Jakarta_Sans({ weight: "400" });
+const jakarta = Plus_Jakarta_Sans({ weight: "400", subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -24,7 +24,9 @@ export default function RootLayout({
       <body className={`${jakarta.className}  antialiased`}>
         <Provider>
           <Header />
-          <main className="min-h-screen w-full pt-8  md:pt-4 pb-12">{children}</main>
+          <main className="min-h-screen w-full pt-8  md:pt-4 pb-12">
+            {children}
+          </main>
           <Toaster />
           <Footer />
         </Provider>
