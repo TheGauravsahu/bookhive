@@ -19,6 +19,7 @@ import DeleteReviewButton from "./deleteReviewButton";
 import { formatDate } from "@/lib/utils";
 import { Star } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 type AddReviewFormValues = z.infer<typeof addReviewSchema>;
 
@@ -27,12 +28,16 @@ interface AddReviewProps {
 }
 
 export default function Review({ bookId }: AddReviewProps) {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+
   const [reviews] = trpc.review.getAll.useSuspenseQuery({ bookId });
 
   const addReviewForm = useForm<AddReviewFormValues>({
     resolver: zodResolver(addReviewSchema),
     defaultValues: {
       review: "",
+      rating: 0,
       bookId,
     },
   });
@@ -41,8 +46,9 @@ export default function Review({ bookId }: AddReviewProps) {
 
   const addReviewMutation = trpc.review.add.useMutation({
     onSuccess: async () => {
-      await utils.review.invalidate();
       addReviewForm.reset();
+      setRating(0);
+      await utils.review.invalidate();
     },
     onError: (error) => {
       console.error("Failed to add review:", error);
@@ -50,6 +56,13 @@ export default function Review({ bookId }: AddReviewProps) {
   });
 
   function onSubmit(values: AddReviewFormValues) {
+    if (rating === 0) {
+      addReviewForm.setError("rating", {
+        message: "Rating must be at least 1",
+      });
+      return;
+    }
+    values.rating = rating;
     addReviewMutation.mutate(values);
   }
 
@@ -68,6 +81,41 @@ export default function Review({ bookId }: AddReviewProps) {
                 <FormLabel className="font-semibold">Add review</FormLabel>
                 <FormControl>
                   <Textarea {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* rating */}
+          <FormField
+            control={addReviewForm.control}
+            name="rating"
+            render={() => (
+              <FormItem>
+                <FormLabel className="font-semibold">Rating</FormLabel>
+                <FormControl>
+                  <div className="flex items-center gap-1 mt-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        size={25}
+                        className={`cursor-pointer transition-all ease-in-out ${
+                          (hover || rating) >= star
+                            ? "fill-yellow-400 text-yellow-400"
+                            : "stroke-gray-400 text-gray-400"
+                        }`}
+                        onMouseEnter={() => setHover(star)}
+                        onMouseLeave={() => setHover(0)}
+                        onClick={() => {
+                          setRating(star);
+                          addReviewForm.setValue("rating", star, {
+                            shouldValidate: true,
+                          });
+                        }}
+                      />
+                    ))}
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>

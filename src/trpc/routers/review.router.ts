@@ -8,21 +8,23 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../init";
 export const reviewRouter = createTRPCRouter({
   add: protectedProcedure
     .input(addReviewSchema)
-    .mutation(async ({ ctx: { session, db }, input: { bookId, review } }) => {
-      try {
-        await db.review.create({
-          data: {
-            comment: review,
-            userId: session.user.id,
-            rating: 5,
-            bookId,
-          },
-        });
-      } catch (error) {
-        console.log("Failed to add review", error);
-        throw Error("Failed to add review");
+    .mutation(
+      async ({ ctx: { session, db }, input: { bookId, review, rating } }) => {
+        try {
+          await db.review.create({
+            data: {
+              comment: review,
+              userId: session.user.id,
+              rating,
+              bookId,
+            },
+          });
+        } catch (error) {
+          console.log("Failed to add review", error);
+          throw Error("Failed to add review");
+        }
       }
-    }),
+    ),
 
   getAll: publicProcedure
     .input(getAllReviewSchema)
