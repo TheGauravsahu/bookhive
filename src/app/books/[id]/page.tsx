@@ -4,6 +4,7 @@ import React from "react";
 import { Clock, User } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import Review from "@/components/books/reviews/review";
+import { auth } from "@/auth";
 
 interface BookDetailsProps {
   params: Promise<{ id: string }>;
@@ -14,6 +15,8 @@ export default async function BookDetails({ params }: BookDetailsProps) {
   const book = await trpc.book.getDetails({ id });
 
   void trpc.review.getAll.prefetch({ bookId: id });
+
+  const session = await auth()
 
   if (!book) return <div>No book found.</div>;
 
@@ -49,7 +52,7 @@ export default async function BookDetails({ params }: BookDetailsProps) {
       </div>
 
       {/* Reviews Section */}
-      <Review bookId={id} />
+      <Review bookId={id} session={session} />
     </div>
   );
 }

@@ -20,16 +20,22 @@ import { formatDate } from "@/lib/utils";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { Session } from "next-auth";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type AddReviewFormValues = z.infer<typeof addReviewSchema>;
 
-interface AddReviewProps {
+interface ReviewProps {
   bookId: string;
+  session: Session | null;
 }
 
-export default function Review({ bookId }: AddReviewProps) {
+export default function Review({ bookId, session }: ReviewProps) {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+
+  const router = useRouter();
 
   const [reviews] = trpc.review.getAll.useSuspenseQuery({ bookId });
 
@@ -60,6 +66,11 @@ export default function Review({ bookId }: AddReviewProps) {
       addReviewForm.setError("rating", {
         message: "Rating must be at least 1",
       });
+      return;
+    }
+    if (!session?.user) {
+      toast.error("You must be logged in to add a review.");
+      router.push(`/login?redirect=/books/${bookId}`);
       return;
     }
     values.rating = rating;

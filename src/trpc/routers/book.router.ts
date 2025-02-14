@@ -11,7 +11,7 @@ export const bookRouter = createTRPCRouter({
     });
   }),
 
-  getDetails: protectedProcedure
+  getDetails: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input: { id } }) => {
       return ctx.db.book.findFirst({

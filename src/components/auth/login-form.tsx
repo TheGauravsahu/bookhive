@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-export default function LoginForm() {
+export default function LoginForm({redirect}:{redirect:string}) {
   const router = useRouter();
 
   const loginForm = useForm<LoginFormValues>({
@@ -38,7 +38,7 @@ export default function LoginForm() {
       toast.error("Invalid email or password.");
     } else {
       toast.success("Login successful!");
-      router.push("/books");
+      router.push(redirect || "/books");
     }
   };
   return (
