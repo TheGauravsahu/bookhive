@@ -5,15 +5,14 @@ import { auth } from "@/auth";
 import db from "@/lib/prisma";
 import { ZodError } from "zod";
 
-export const createTRPCContext = cache(async (opts: { headers: Headers }) => {
-  const heads = new Headers(await headers());
-  heads.set("x-trpc-source", "rsc");
+export const createTRPCContext = cache(async () => {
+  const heads = headers(); 
   const session = await auth();
 
   return {
     db,
     session,
-    ...opts,
+    headers: heads, 
   };
 });
 
@@ -23,8 +22,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
+        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
       },
     };
   },
