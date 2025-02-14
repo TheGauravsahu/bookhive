@@ -25,12 +25,12 @@ export const bookRouter = createTRPCRouter({
                 select: {
                   name: true,
                   avatar: true,
-                }
-              }
-            }
+                },
+              },
+            },
           },
           favorites: true,
-        }
+        },
       });
     }),
 
