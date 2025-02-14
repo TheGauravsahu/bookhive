@@ -1,11 +1,14 @@
-// import superjson from "superjson";
+import superjson from "superjson";
 import { initTRPC, TRPCError } from "@trpc/server";
+import { headers } from "next/headers";
 import { cache } from "react";
 import { auth } from "@/auth";
 import db from "@/lib/prisma";
 import { ZodError } from "zod";
 
 export const createTRPCContext = cache(async (opts: { headers: Headers }) => {
+  const heads = new Headers(await headers());
+  heads.set("x-trpc-source", "rsc");
   const session = await auth();
 
   return {
@@ -16,7 +19,7 @@ export const createTRPCContext = cache(async (opts: { headers: Headers }) => {
 });
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
-  // transformer: superjson,
+  transformer: superjson,
   errorFormatter({ error, shape }) {
     return {
       ...shape,
