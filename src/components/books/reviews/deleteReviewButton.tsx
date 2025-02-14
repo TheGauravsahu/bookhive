@@ -2,12 +2,20 @@
 
 import { trpc } from "@/trpc/client";
 
-export default function DeleteReviewButton({ reviewId }: { reviewId: string }) {
+interface DeleteReviewProps {
+  reviewId: string;
+  bookId: string;
+}
+
+export default function DeleteReviewButton({
+  reviewId,
+  bookId,
+}: DeleteReviewProps) {
   const utils = trpc.useUtils();
 
   const deleteReviewMutation = trpc.review.delete.useMutation({
-    onSettled: () => {
-      utils.book.getDetails.invalidate();
+    onSuccess: () => {
+      utils.book.getDetails.invalidate({ id: bookId });
     },
   });
   return (

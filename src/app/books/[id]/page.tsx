@@ -80,7 +80,7 @@ export default async function BookDetails({ params }: BookDetailsProps) {
                   </div>
                   <div className="text-sm  ml-auto flex flex-col gap-1">
                     <span>{formatDate(review.createdAt)}</span>
-                    <DeleteReviewButton reviewId={review.id} />
+                    <DeleteReviewButton reviewId={review.id} bookId={book.id} />
                   </div>
                 </div>
                 <p>{review.comment}</p>

@@ -35,8 +35,11 @@ export default function AddReview({ bookId }: AddReviewProps) {
 
   const addReviewMutation = trpc.review.add.useMutation({
     onSuccess: () => {
-      utils.book.getDetails.invalidate();
+      utils.book.getDetails.refetch({ id: bookId });
       addReviewForm.reset();
+    },
+    onError: (error) => {
+      console.error("Failed to add review:", error);
     },
   });
 
