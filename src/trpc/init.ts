@@ -1,4 +1,3 @@
-import superjson from "superjson";
 import { initTRPC, TRPCError } from "@trpc/server";
 import { headers } from "next/headers";
 import { cache } from "react";
@@ -19,7 +18,6 @@ export const createTRPCContext = cache(async (opts: { headers: Headers }) => {
 });
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
-  transformer: superjson,
   errorFormatter({ error, shape }) {
     return {
       ...shape,
