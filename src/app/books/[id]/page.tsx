@@ -1,10 +1,9 @@
 import { trpc } from "@/trpc/server";
 import Image from "next/image";
 import React from "react";
-import { Star, Clock, User } from "lucide-react";
+import { Clock, User } from "lucide-react";
 import { formatDate } from "@/lib/utils";
-import AddReview from "@/components/books/reviews/addReview";
-import DeleteReviewButton from "@/components/books/reviews/deleteReviewButton";
+import Review from "@/components/books/reviews/review";
 
 interface BookDetailsProps {
   params: Promise<{ id: string }>;
@@ -13,6 +12,8 @@ interface BookDetailsProps {
 export default async function BookDetails({ params }: BookDetailsProps) {
   const { id } = await params;
   const book = await trpc.book.getDetails({ id });
+
+  void trpc.review.getAll.prefetch({ bookId: id });
 
   if (!book) return <div>No book found.</div>;
 
@@ -48,49 +49,7 @@ export default async function BookDetails({ params }: BookDetailsProps) {
       </div>
 
       {/* Reviews Section */}
-      <AddReview bookId={id} />
-
-      <div className="p-6">
-        <h2 className="text-2xl font-bold mb-6">Reviews</h2>
-        {book.reviews.length > 0 ? (
-          <div className="space-y-6">
-            {book.reviews.map((review) => (
-              <div key={review.id} className="border-b pb-6">
-                <div className="flex items-center gap-4 mb-2">
-                  {review.user.avatar && (
-                    <Image
-                      src={review.user.avatar}
-                      width={40}
-                      height={40}
-                      alt={review.user.name}
-                      className="rounded-full"
-                    />
-                  )}
-                  <div>
-                    <p className="font-semibold">{review.user.name}</p>
-                    <div className="flex items-center gap-1">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={16}
-                          className="fill-yellow-400 text-yellow-400"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="text-sm  ml-auto flex flex-col gap-1">
-                    <span>{formatDate(review.createdAt)}</span>
-                    <DeleteReviewButton reviewId={review.id} bookId={book.id} />
-                  </div>
-                </div>
-                <p>{review.comment}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No reviews yet.</p>
-        )}
-      </div>
+      <Review bookId={id} />
     </div>
   );
 }

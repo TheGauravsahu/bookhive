@@ -8,3 +8,8 @@ export const addReviewSchema = z.object({
 export const deleteReviewSchema = z.object({
   reviewId: z.string().min(1, "Review ID is required"),
 });
+
+export const getAllReviewSchema = z.object({
+  bookId: z.string().min(1, "Book ID is required"),
+
+})

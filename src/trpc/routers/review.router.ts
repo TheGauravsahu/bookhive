@@ -1,8 +1,9 @@
 import {
   addReviewSchema,
   deleteReviewSchema,
+  getAllReviewSchema,
 } from "@/components/books/reviews/review.schema";
-import { createTRPCRouter, protectedProcedure } from "../init";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../init";
 
 export const reviewRouter = createTRPCRouter({
   add: protectedProcedure
@@ -21,6 +22,24 @@ export const reviewRouter = createTRPCRouter({
         console.log("Failed to add review", error);
         throw Error("Failed to add review");
       }
+    }),
+
+  getAll: publicProcedure
+    .input(getAllReviewSchema)
+    .query(async ({ ctx, input: { bookId } }) => {
+      return await ctx.db.review.findMany({
+        where: {
+          bookId,
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+              avatar: true,
+            },
+          },
+        },
+      });
     }),
 
   delete: protectedProcedure

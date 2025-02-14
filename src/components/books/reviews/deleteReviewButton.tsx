@@ -4,18 +4,14 @@ import { trpc } from "@/trpc/client";
 
 interface DeleteReviewProps {
   reviewId: string;
-  bookId: string;
 }
 
-export default function DeleteReviewButton({
-  reviewId,
-  bookId,
-}: DeleteReviewProps) {
+export default function DeleteReviewButton({ reviewId }: DeleteReviewProps) {
   const utils = trpc.useUtils();
 
   const deleteReviewMutation = trpc.review.delete.useMutation({
-    onSuccess: () => {
-      utils.book.getDetails.invalidate({ id: bookId });
+    onSuccess: async () => {
+      await utils.review.invalidate();
     },
   });
   return (

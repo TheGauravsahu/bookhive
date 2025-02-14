@@ -19,16 +19,6 @@ export const bookRouter = createTRPCRouter({
           id,
         },
         include: {
-          reviews: {
-            include: {
-              user: {
-                select: {
-                  name: true,
-                  avatar: true,
-                },
-              },
-            },
-          },
           favorites: true,
         },
       });
