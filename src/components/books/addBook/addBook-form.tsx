@@ -151,7 +151,9 @@ export default function AddBookForm() {
           )}
         />
 
-        <Button type="submit">Add</Button>
+        <Button type="submit" disabled={createbookMutation.isPending} className={createbookMutation.isPending ? "cursor-progress" : "cursor-pointer"}>
+          {createbookMutation.isPending ? "Adding" : "Add"}
+        </Button>
       </form>
     </Form>
   );

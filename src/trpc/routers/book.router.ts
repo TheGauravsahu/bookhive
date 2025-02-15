@@ -1,14 +1,11 @@
 import { addBookSchema } from "@/components/books/addBook/addBook.schema";
 import { publicProcedure, createTRPCRouter, protectedProcedure } from "../init";
 import { z } from "zod";
+import { deleteBookSchema } from "@/components/books/books.schema";
 
 export const bookRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
-    return ctx.db.book.findMany({
-      include: {
-        reviews: true,
-      },
-    });
+    return ctx.db.book.findMany();
   }),
 
   getDetails: publicProcedure
@@ -38,5 +35,15 @@ export const bookRouter = createTRPCRouter({
       });
 
       return book;
+    }),
+
+  delete: protectedProcedure
+    .input(deleteBookSchema)
+    .mutation(async ({ ctx: { db }, input: { bookId } }) => {
+      await db.book.delete({
+        where: {
+          id: bookId,
+        },
+      });
     }),
 });

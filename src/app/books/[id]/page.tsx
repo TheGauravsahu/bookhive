@@ -36,8 +36,8 @@ export default async function BookDetails({ params }: BookDetailsProps) {
 
         <div className="flex-grow mt-4 md:mt-0">
           <h1 className="text-3xl font-bold  mb-2">{book.title}</h1>
-          <p className="text-lg text-gray-600 mb-4">by {book.author}</p>
-          <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+          <p className="text-lg mb-4">by {book.author}</p>
+          <div className="flex items-center gap-4 text-sm  mb-4">
             <span className="flex items-center gap-1">
               <Clock size={16} />
               {formatDate(book.createdAt)}
@@ -47,7 +47,7 @@ export default async function BookDetails({ params }: BookDetailsProps) {
               {book.category}
             </span>
           </div>
-          <p className="text-gray-700 mb-6">{book.description}</p>
+          <p className="text-foreground/80 mb-6">{book.description}</p>
         </div>
       </div>
 
