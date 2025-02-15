@@ -10,9 +10,12 @@ interface BookCardProps {
     createdAt: string;
     updatedAt: string;
   };
+  userId: string | null;
 }
 
-export default function BookCard({ book }: BookCardProps) {
+export default function BookCard({ book, userId }: BookCardProps) {
+  const isCurrentUserBook = book.userId === userId;
+
   return (
     <div className="w-80 h-96 border rounded-lg p-4">
       <div className="w-full h-[60%] rounded-lg overflow-hidden dark:bg-black bg-secondary">
@@ -33,7 +36,10 @@ export default function BookCard({ book }: BookCardProps) {
             Author - {book.author}
           </h3>
           <p className="text-foreground/60 text-sm">
-            {book.description.slice(1, 40)}...
+            {isCurrentUserBook
+              ? book.description.slice(1, 40)
+              : book.description.slice(1, 60)}
+            ...
           </p>
           <span className="mt-4 text-xs text-foreground/40">
             {formatDate(book.createdAt)}
@@ -42,7 +48,7 @@ export default function BookCard({ book }: BookCardProps) {
       </Link>
 
       {/* actions */}
-      <BookActions bookId={book.id} />
+      {isCurrentUserBook && <BookActions bookId={book.id} />}
     </div>
   );
 }

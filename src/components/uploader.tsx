@@ -57,7 +57,7 @@ export default function Uploader({
   const onSuccess = (res: IKUploadResponse) => {
     setUploading(false);
     setError(null);
-    console.log("Success", res);
+    console.log("Success", res.url);
     onUploadSuccess(res.url);
   };
 

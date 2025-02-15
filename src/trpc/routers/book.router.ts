@@ -27,6 +27,7 @@ export const bookRouter = createTRPCRouter({
       const book = await ctx.db.book.create({
         data: {
           title: input.title,
+          userId: ctx.session.user.id,
           description: input.description,
           category: input.category!,
           coverImage: input.coverImage!,
