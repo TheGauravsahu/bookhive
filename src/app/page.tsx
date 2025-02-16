@@ -1,4 +1,4 @@
-import Image from "next/image";
+import HomeImage from "@/components/home-image";
 
 export default function Home() {
   return (
@@ -12,14 +12,11 @@ export default function Home() {
           and share recommendations with the community.
         </p>
 
-        <div className="h-96 w-full relative my-4 md:mt-4 rounded-lg">
-          <Image
-            src="/bookhive-dark.png"
-            alt="bookhive"
-            fill
-            className="object-contain  rounded-lg"
-          />
-        </div>
+        <HomeImage
+          lightImage="/showcase/light/bookhive.png"
+          darkImage="/showcase/dark/bookhive.png"
+          alt="bookhive"
+        />
       </main>
 
       <section className="md:mt-24 px-6 md:px-12 md:h-96 h-[70vh] flex md:items-center md:justify-center flex-col">
@@ -52,14 +49,11 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="md:h-96 h-80 w-full relative my-6 rounded-lg overflow-hidden">
-          <Image
-            src="/bookhive-demo.png"
-            alt="BookHive Demo"
-            fill
-            className="object-contain rounded-lg"
-          />
-        </div>
+        <HomeImage
+          lightImage="/showcase/light/bookhive-demo.png"
+          darkImage="/showcase/dark/bookhive-demo.png"
+          alt="BookHive Demo"
+        />
       </section>
 
       <section className="flex flex-col items-center justify-center w-full h-[60vh] md:h-screen px-8 md:gap-4 text-center">
@@ -71,14 +65,11 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="md:h-96 h-80 w-full relative my-6 rounded-lg overflow-hidden">
-          <Image
-            src="/bookhive-reviews.png"
-            alt="BookHive Demo"
-            fill
-            className="object-contain rounded-lg"
-          />
-        </div>
+        <HomeImage
+          lightImage="/showcase/light/bookhive-reviews.png"
+          darkImage="/showcase/dark/bookhive-reviews.png"
+          alt="BookHive Reviews"
+        />
       </section>
     </div>
   );
