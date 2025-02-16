@@ -20,6 +20,7 @@ export default function BookActions({ bookId }: BookActionsProps) {
   return (
     <div className="flex items-center  gap-2 border-t mt-2 py-1">
       <Link
+        prefetch={true}
         href={"/books/" + bookId + "/edit"}
         className="text-sm hover:underline cursor-pointer text-foreground/90"
       >

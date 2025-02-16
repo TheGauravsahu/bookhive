@@ -70,7 +70,7 @@ export function AppSidebar() {
                       toggleSidebar();
                     }}
                   >
-                    <Link href={item.url}>
+                    <Link prefetch={true} href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>
@@ -93,7 +93,7 @@ export function AppSidebar() {
                       toggleSidebar();
                     }}
                   >
-                    <Link href={item.url}>
+                    <Link prefetch={true} href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
                     </Link>

@@ -33,7 +33,7 @@ export default function BookCard({ book, userId }: BookCardProps) {
           />
         </Link>
       </div>
-      <Link href={"/books/" + book.id}>
+      <Link prefetch={true} href={"/books/" + book.id}>
         <div className="mt-4 *:cursor-pointer">
           <h2 className="font-bold">{book.title}</h2>
           <h3 className="font-semibold text-sm text-foreground/80 my-1">

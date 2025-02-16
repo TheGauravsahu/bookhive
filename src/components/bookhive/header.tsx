@@ -25,8 +25,12 @@ export default async function Header() {
       {/* links/sidebar */}
       <div className="hidden md:flex items-center justify-center gap-4 *:font-semibold ">
         <Link href="/">Home</Link>
-        <Link href="/books">Books</Link>
-        <Link href="/books">Trending</Link>
+        <Link prefetch={true} href="/books">
+          Books
+        </Link>
+        <Link prefetch={true} href="/books">
+          Trending
+        </Link>
       </div>
 
       <div className="flex gap-2 items-center">
