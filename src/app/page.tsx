@@ -52,7 +52,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="md:h-96 h-80 w-full relative my-6 rounded-lg shadow-lg overflow-hidden">
+        <div className="md:h-96 h-80 w-full relative my-6 rounded-lg overflow-hidden">
           <Image
             src="/bookhive-demo.png"
             alt="BookHive Demo"
@@ -71,7 +71,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="md:h-96 h-80 w-full relative my-6 rounded-lg shadow-lg overflow-hidden">
+        <div className="md:h-96 h-80 w-full relative my-6 rounded-lg overflow-hidden">
           <Image
             src="/bookhive-reviews.png"
             alt="BookHive Demo"
