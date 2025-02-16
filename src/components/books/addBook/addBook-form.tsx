@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
-  SelectContent,  
+  SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -55,7 +55,7 @@ export default function AddBookForm() {
       console.error("failed to add book:", error.message);
     },
   });
-  
+
   function onSubmit(values: AddBookFormValues) {
     createbookMutation.mutate(values);
   }
@@ -127,7 +127,12 @@ export default function AddBookForm() {
                   <SelectContent>
                     <SelectItem value="fiction">Fiction</SelectItem>
                     <SelectItem value="non-fiction">Non-Fiction</SelectItem>
-                    <SelectItem value="fantasy">Fantasy</SelectItem>
+                    <SelectItem value="self-help">Self Help</SelectItem>
+                    <SelectItem value="motivation">Motivation</SelectItem>
+                    <SelectItem value="productivity">Productivity</SelectItem>
+                    <SelectItem value="personal-development">
+                      Personal Development
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>
@@ -151,7 +156,13 @@ export default function AddBookForm() {
           )}
         />
 
-        <Button type="submit" disabled={createbookMutation.isPending} className={createbookMutation.isPending ? "cursor-progress" : "cursor-pointer"}>
+        <Button
+          type="submit"
+          disabled={createbookMutation.isPending}
+          className={
+            createbookMutation.isPending ? "cursor-progress" : "cursor-pointer"
+          }
+        >
           {createbookMutation.isPending ? "Adding" : "Add"}
         </Button>
       </form>

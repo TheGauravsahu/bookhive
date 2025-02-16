@@ -82,7 +82,10 @@ export default function EditBookForm({ id }: EditBookProps) {
 
   return (
     <Form {...editBookForm}>
-      <form onSubmit={editBookForm.handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        onSubmit={editBookForm.handleSubmit(onSubmit)}
+        className="space-y-6"
+      >
         {" "}
         {/* title */}
         <FormField
@@ -145,7 +148,12 @@ export default function EditBookForm({ id }: EditBookProps) {
                   <SelectContent>
                     <SelectItem value="fiction">Fiction</SelectItem>
                     <SelectItem value="non-fiction">Non-Fiction</SelectItem>
-                    <SelectItem value="fantasy">Fantasy</SelectItem>
+                    <SelectItem value="self-help">Self Help</SelectItem>
+                    <SelectItem value="motivation">Motivation</SelectItem>
+                    <SelectItem value="productivity">Productivity</SelectItem>
+                    <SelectItem value="personal-development">
+                      Personal Development
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>
