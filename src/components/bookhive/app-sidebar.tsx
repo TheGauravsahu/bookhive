@@ -46,7 +46,7 @@ const booksItems = [
 
 export function AppSidebar() {
   return (
-    <Sidebar hidden>
+    <Sidebar>
       <SidebarHeader>
         <Link href="/">
           <h1 className="text-2xl md:text-3xl font-bold">BookHive.</h1>

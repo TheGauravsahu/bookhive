@@ -25,8 +25,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${jakarta.className}  antialiased`}>
         <Provider>
-          <SidebarProvider>
-          <Header />
+          <SidebarProvider defaultOpen={false}>
+            <Header />
             <AppSidebar />
             <main className="min-h-screen w-full pt-20  pb-12">{children}</main>
           </SidebarProvider>
