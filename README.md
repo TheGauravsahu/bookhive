@@ -122,9 +122,6 @@ We welcome contributions to BookHive! Here’s how you can contribute:
 5. Push to your fork (`git push origin feature-name`).
 6. Open a pull request to merge your changes into the main repository.
 
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
