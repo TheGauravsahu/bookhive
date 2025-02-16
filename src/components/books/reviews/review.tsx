@@ -169,7 +169,9 @@ export default function Review({ bookId, session }: ReviewProps) {
                   </div>
                   <div className="text-sm  ml-auto flex flex-col gap-1">
                     <span>{formatDate(review.createdAt)}</span>
-                    <DeleteReviewButton reviewId={review.id} />
+                    {session?.user.id === review.userId && (
+                      <DeleteReviewButton reviewId={review.id} />
+                    )}
                   </div>
                 </div>
                 <p>{review.comment}</p>
