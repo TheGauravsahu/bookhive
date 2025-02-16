@@ -10,7 +10,7 @@ const books = [
       "A spiritual guide that teaches mindfulness and how to live in the present moment, letting go of past regrets and future anxieties.",
     coverImage:
       "https://ik.imagekit.io/gauravsahu/bookhive/the_power_of_now.jpg",
-    category: "Self-Help",
+    category: "self-help",
     userId,
   },
   {
@@ -20,7 +20,7 @@ const books = [
       "The inspiring autobiography of a Navy SEAL who overcame poverty, abuse, and obesity through sheer mental toughness and discipline.",
     coverImage:
       "https://ik.imagekit.io/gauravsahu/bookhive/cant_hurt_me.jpg?updatedAt=1739708207384",
-    category: "Motivation",
+    category: "motivation",
     userId,
   },
   {
@@ -30,7 +30,7 @@ const books = [
       "A counterintuitive self-help book that argues happiness comes from embracing life’s struggles rather than avoiding them.",
     coverImage:
       "https://ik.imagekit.io/gauravsahu/bookhive/the_subtle_art_of_not_giving_fuck.jpg",
-    category: "Self-Help",
+    category: "self-help",
     userId,
   },
   {
@@ -39,7 +39,7 @@ const books = [
     description:
       "Explores the power of focused, distraction-free work in an age of constant digital interruptions, offering strategies for improving productivity.",
     coverImage: "https://ik.imagekit.io/gauravsahu/bookhive/deep_work.jpg",
-    category: "Productivity",
+    category: "productivity",
     userId,
   },
   {
@@ -48,7 +48,7 @@ const books = [
     description:
       "A book that promotes waking up at 5 AM as a habit for success, providing a structured morning routine to maximize productivity.",
     coverImage: "https://ik.imagekit.io/gauravsahu/bookhive/the_5_am_club.jpg",
-    category: "Personal Development",
+    category: "personal-development",
     userId,
   },
 ];
