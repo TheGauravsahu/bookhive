@@ -2,6 +2,7 @@ import {
   addReviewSchema,
   deleteReviewSchema,
   getAllReviewSchema,
+  getReviewDetailSchema,
 } from "@/components/books/reviews/review.schema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../init";
 
@@ -32,6 +33,24 @@ export const reviewRouter = createTRPCRouter({
       return await ctx.db.review.findMany({
         where: {
           bookId,
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+              avatar: true,
+            },
+          },
+        },
+      });
+    }),
+
+  getDetails: protectedProcedure
+    .input(getReviewDetailSchema)
+    .mutation(async ({ ctx: { db }, input: { id } }) => {
+      return await db.review.findFirstOrThrow({
+        where: {
+          id,
         },
         include: {
           user: {

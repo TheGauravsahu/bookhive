@@ -23,6 +23,7 @@ import { useState } from "react";
 import { Session } from "next-auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type AddReviewFormValues = z.infer<typeof addReviewSchema>;
 
@@ -174,7 +175,16 @@ export default function Review({ bookId, session }: ReviewProps) {
                     )}
                   </div>
                 </div>
-                <p>{review.comment}</p>
+                <p>
+                  {review.comment.slice(0, 80)} ...
+                  <Link
+                    href={"/books/" + bookId + "/review?reviewId=" + review.id}
+                    prefetch={true}
+                    className="hover:underline"
+                  >
+                    more
+                  </Link>
+                </p>
               </div>
             ))}
           </div>

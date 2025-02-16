@@ -16,3 +16,7 @@ export const deleteReviewSchema = z.object({
 export const getAllReviewSchema = z.object({
   bookId: z.string().min(1, "Book ID is required"),
 });
+
+export const getReviewDetailSchema = z.object({
+  id: z.string().min(1, "Review ID is required"),
+});
