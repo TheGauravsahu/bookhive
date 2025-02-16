@@ -2,6 +2,7 @@ import { addBookSchema } from "@/components/books/addBook/addBook.schema";
 import { publicProcedure, createTRPCRouter, protectedProcedure } from "../init";
 import { z } from "zod";
 import { deleteBookSchema } from "@/components/books/books.schema";
+import { editBookSchema } from "@/components/books/editBook/editBook.schema";
 
 export const bookRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
@@ -37,6 +38,28 @@ export const bookRouter = createTRPCRouter({
 
       return book;
     }),
+
+  edit: protectedProcedure
+    .input(editBookSchema)
+    .mutation(
+      async ({
+        ctx,
+        input: { bookId, title, description, author, category, coverImage },
+      }) => {
+        await ctx.db.book.update({
+          where: {
+            id: bookId,
+          },
+          data: {
+            title,
+            description,
+            author,
+            category,
+            coverImage,
+          },
+        });
+      }
+    ),
 
   delete: protectedProcedure
     .input(deleteBookSchema)

@@ -21,7 +21,7 @@ export default async function BookDetails({ params }: BookDetailsProps) {
   if (!book) return <div>No book found.</div>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4">
       {/* Book Header Section */}
       <div className="md:flex p-6 gap-8 border-b">
         <div className="flex-shrink-0">

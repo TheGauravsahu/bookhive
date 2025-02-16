@@ -18,12 +18,16 @@ export default function BookCard({ book, userId }: BookCardProps) {
 
   return (
     <div className="w-80 h-96 border rounded-lg p-4">
-      <div className="w-full h-[60%] rounded-lg overflow-hidden dark:bg-black bg-secondary">
-        <Link href={"/books/" + book.id} prefetch={true}>
+      <div className="w-full h-[60%] flex-shrink-0 rounded-lg overflow-hidden dark:bg-black bg-secondary p-1">
+        <Link
+          href={"/books/" + book.id}
+          prefetch={true}
+          className="rounded-lg flex-shrink-0"
+        >
           <Image
-            className="h-full rounded-lg object-contain cursor-pointer hover:scale-95 ease-in-out transition-all"
-            width={600}
-            height={600}
+            className="h-full rounded-lg  object-contain cursor-pointer hover:scale-95 ease-in-out transition-all"
+            width={240}
+            height={360}
             src={book.coverImage}
             alt={book.title}
           />

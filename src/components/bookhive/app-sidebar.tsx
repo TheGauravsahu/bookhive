@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -9,9 +11,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { Home, Book, TrendingUp,PlusCircle  } from "lucide-react"; // Example icons
+import { Home, Book, TrendingUp, PlusCircle } from "lucide-react"; // Example icons
 
 const menuItems = [
   {
@@ -42,9 +45,11 @@ const booksItems = [
     url: "/books/add",
     icon: PlusCircle,
   },
-]
+];
 
 export function AppSidebar() {
+  const { toggleSidebar } = useSidebar();
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -59,7 +64,12 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    asChild
+                    onClick={() => {
+                      toggleSidebar();
+                    }}
+                  >
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -77,7 +87,12 @@ export function AppSidebar() {
             <SidebarMenu>
               {booksItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton
+                    asChild
+                    onClick={() => {
+                      toggleSidebar();
+                    }}
+                  >
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
