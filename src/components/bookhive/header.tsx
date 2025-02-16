@@ -11,26 +11,24 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { User2 } from "lucide-react";
 import Logout from "../auth/logout";
+import { SidebarTrigger } from "../ui/sidebar";
 
 export default async function Header() {
   const session = await auth();
 
   return (
-    <header className="flex justify-between items-center px-6 py-3 md:px-12 border-b fixed top-0 left-0 right-0 bg-white dark:bg-black z-50">
+    <header className="flex justify-between items-center px-6 py-3 md:px-12 border-b fixed top-0 left-0 right-0 bg-background z-50">
       <Link href="/">
         <h1 className="text-2xl md:text-3xl font-bold">BookHive 📚</h1>
       </Link>
+
+      {/* links/sidebar */}
       <div className="hidden md:flex items-center justify-center gap-4 *:font-semibold ">
-        <Link href="/">
-          Home
-        </Link>
-        <Link href="/books">
-          Books
-        </Link>
-        <Link href="/books">
-          Trending
-        </Link>
+        <Link href="/">Home</Link>
+        <Link href="/books">Books</Link>
+        <Link href="/books">Trending</Link>
       </div>
+
       <div className="flex gap-2 items-center">
         <Toggle />
         {session ? (
@@ -55,6 +53,7 @@ export default async function Header() {
             </span>
           </button>
         )}
+        <SidebarTrigger />
       </div>
     </header>
   );

@@ -42,7 +42,7 @@ function FeatureCard({
   description: string;
 }) {
   return (
-    <div className="p-6 rounded-xl dark:bg-black bg-slate-50 shadow-md text-center">
+    <div className="p-6 rounded-xl  dark:bg-black bg-slate-50 shadow-md text-center">
       <h4 className="text-xl font-semibold">{title}</h4>
       <p className="mt-2 text-gray-400">{description}</p>
     </div>

@@ -5,6 +5,8 @@ import Header from "@/components/bookhive/header";
 import Footer from "@/components/bookhive/footer";
 import { Toaster } from "@/components/ui/sonner";
 import Provider from "@/components/bookhive/providers";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/bookhive/app-sidebar";
 
 export const metadata: Metadata = {
   title: "BookHive - Ultimate destination for book lovers",
@@ -23,10 +25,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${jakarta.className}  antialiased`}>
         <Provider>
+          <SidebarProvider>
           <Header />
-          <main className="min-h-screen w-full pt-20  pb-12">
-            {children}
-          </main>
+            <AppSidebar />
+            <main className="min-h-screen w-full pt-20  pb-12">{children}</main>
+          </SidebarProvider>
           <Toaster />
           <Footer />
         </Provider>
