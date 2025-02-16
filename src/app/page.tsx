@@ -4,9 +4,9 @@ export default function Home() {
   return (
     <div className="min-h-screen ">
       <main className="flex flex-col items-center text-center px-6 mt-24">
-        <h2 className="text-4xl font-bold md:text-6xl">
+        <h1 className="text-4xl font-bold md:text-6xl">
           Discover. Review. Recommend.
-        </h2>
+        </h1>
         <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-2xl">
           Your ultimate destination for book lovers. Read reviews, rate books,
           and share recommendations with the community.
@@ -42,21 +42,38 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex md:flex-row flex-col items-center  w-full h-[60vh] md:h-screen px-8 md:gap-4 ">
-        <div className="md:w-[90%]">
-          <h1 className="font-bold text-4xl text-white mb-4">
-            Explore BookHive
-          </h1>
-          <p className="text-lg text-gray-300 max-w-2xl">
+      <section className="flex flex-col items-center justify-center w-full h-[60vh] md:h-screen px-8 md:gap-4 text-center">
+        <div>
+          <h1 className="text-4xl font-bold md:text-6xl">Explore BookHive</h1>
+          <p className="text-lg text-gray-300 max-w-2xl my-4">
             Discover, review, and rate books effortlessly with BookHive. Our
             intuitive interface makes it easy to find and share your favorite
             reads.
           </p>
         </div>
 
-        <div className="md:h-96 h-80 w-full relative my-6 rounded-lg shadow-lg overflow-hidden md:border">
+        <div className="md:h-96 h-80 w-full relative my-6 rounded-lg shadow-lg overflow-hidden">
           <Image
             src="/bookhive-demo.png"
+            alt="BookHive Demo"
+            fill
+            className="object-contain rounded-lg"
+          />
+        </div>
+      </section>
+
+      <section className="flex flex-col items-center justify-center w-full h-[60vh] md:h-screen px-8 md:gap-4 text-center">
+        <div>
+          <h1 className="text-4xl font-bold md:text-6xl">Add. Read. Reviews</h1>
+          <p className="text-lg text-gray-300 max-w-2xl my-4">
+            Read reviews, add, and delete reviews effortlessly with BookHive.
+            Read honest reviews from real readers and share your favorite reads.
+          </p>
+        </div>
+
+        <div className="md:h-96 h-80 w-full relative my-6 rounded-lg shadow-lg overflow-hidden">
+          <Image
+            src="/bookhive-reviews.png"
             alt="BookHive Demo"
             fill
             className="object-contain rounded-lg"
