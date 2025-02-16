@@ -16,7 +16,7 @@ export default async function BookDetails({ params }: BookDetailsProps) {
 
   void trpc.review.getAll.prefetch({ bookId: id });
 
-  const session = await auth()
+  const session = await auth();
 
   if (!book) return <div>No book found.</div>;
 
